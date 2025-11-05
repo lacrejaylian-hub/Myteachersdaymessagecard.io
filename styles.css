@@ -1,0 +1,399 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://cdn.tailwindcss.com');
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 2px, transparent 2px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.card-container {
+    perspective: 1000px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card {
+    width: 500px;
+    height: 450px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 12px solid #2c3e50;
+    border-radius: 25px;
+    box-shadow: 
+        0 0 0 4px #34495e,
+        0 20px 40px rgba(0,0,0,0.3),
+        inset 0 0 0 8px #1a252f;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #1a252f;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+}
+
+.card-face::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, transparent 50%, rgba(255,255,255,0.03) 50%),
+        linear-gradient(0deg, transparent 50%, rgba(255,255,255,0.03) 50%);
+    background-size: 4px 4px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.card-face::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        rgba(255,255,255,0.1) 0%, 
+        transparent 20%, 
+        transparent 80%, 
+        rgba(0,0,0,0.1) 100%);
+    pointer-events: none;
+    z-index: 11;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.theme-classic { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.theme-warm { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.theme-nature { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+.theme-elegant { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+.theme-sunset { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+
+.photo-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.photo-placeholder:hover {
+    transform: scale(1.05);
+    border-color: rgba(255,255,255,0.5);
+}
+
+.photo-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.dancing-script {
+    font-family: 'Dancing Script', cursive;
+}
+
+.sparkle {
+    position: absolute;
+    color: rgba(255,255,255,0.8);
+    animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+.theme-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+    border-color: #fff;
+}
+
+.theme-btn.active {
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+
+.flip-btn {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+.flip-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+.customize-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 1000;
+    margin-bottom: 10px;
+    min-width: 200px;
+}
+
+.dropdown-content.show {
+    display: block;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: rgb(107, 46, 87);
+    animation: confetti-fall 3s linear forwards;
+    pointer-events: none;
+    z-index: 1500;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.customize-btn {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+.customize-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+.bg-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bg-option:hover {
+    transform: scale(1.1);
+    border-color: #333;
+}
+
+.bg-option.active {
+    border-color: #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.bg-purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.bg-ocean { background: linear-gradient(135deg, #2196F3 0%, #21CBF3 100%); }
+.bg-sunset { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+.bg-forest { background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%); }
+.bg-galaxy { background: linear-gradient(135deg, #434343 0%, #000000 100%); }
+
+.memories-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.memories-modal.show {
+    display: flex;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.memories-content {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.memory-photo {
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.memory-photo:hover {
+    transform: scale(1.05);
+}
+
+.upload-area {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.5);
+}
+
+.upload-area:hover {
+    border-color: #999;
+    background: rgba(255,255,255,0.7);
+}
+
+.upload-area.dragover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+/* Tailwind CSS utility classes - you may need to include the full Tailwind CSS file or CDN */
+.min-h-screen { min-height: 100vh; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.p-4 { padding: 1rem; }
+.text-center { text-align: center; }
+.mb-8 { margin-bottom: 2rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.h-full { height: 100%; }
+.flex-col { flex-direction: column; }
+.text-white { color: white; }
+.p-6 { padding: 1.5rem; }
+.relative { position: relative; }
+.mb-4 { margin-bottom: 1rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.font-bold { font-weight: 700; }
+.mb-2 { margin-bottom: 0.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.opacity-90 { opacity: 0.9; }
+.mt-4 { margin-top: 1rem; }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.text-5xl { font-size: 3rem; line-height: 1; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.leading-relaxed { line-height: 1.625; }
+.space-x-2 > * + * { margin-left: 0.5rem; }
+.mt-8 { margin-top: 2rem; }
+.space-x-4 > * + * { margin-left: 1rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.rounded-full { border-radius: 9999px; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.text-gray-700 { color: rgb(55 65 81); }
+.mb-3 { margin-bottom: 0.75rem; }
+.space-x-3 > * + * { margin-left: 0.75rem; }
+.border-gray-300 { border-color: rgb(209 213 219); }
+.text-gray-600 { color: rgb(75 85 99); }
+.text-gray-800 { color: rgb(31 41 55); }
+.bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+.from-blue-200 { --tw-gradient-from: rgb(191 219 254); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(191, 219, 254, 0)); }
+.to-blue-300 { --tw-gradient-to: rgb(147 197 253); }
+.text-blue-600 { color: rgb(37 99 235); }
+

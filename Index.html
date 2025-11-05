@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher's Day Card</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="text-center">
+        <!-- Card Container -->
+        <div class="card-container mb-8">
+            <div class="card mx-auto" id="teacherCard">
+                <!-- Front Face -->
+                <div class="card-face card-front theme-classic" id="cardFront">
+                    <!-- Sparkles -->
+                    <div class="sparkle" style="top: 20%; left: 15%; animation-delay: 0s;">✨</div>
+                    <div class="sparkle" style="top: 30%; right: 20%; animation-delay: 0.5s;">⭐</div>
+                    <div class="sparkle" style="bottom: 25%; left: 25%; animation-delay: 1s;">✨</div>
+                    <div class="sparkle" style="bottom: 35%; right: 15%; animation-delay: 1.5s;">⭐</div>
+                    
+                    <div class="h-full flex flex-col items-center justify-center text-white p-6 relative">
+                        <!-- Photo Upload Area -->
+                        <div class="photo-placeholder mb-4" onclick="document.getElementById('photoInput').click()">
+                            <div id="photoDisplay" class="text-white text-2xl">📷</div>
+                        </div>
+                        <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+                        
+                        <h1 class="text-3xl font-bold dancing-script mb-2">Happy Teacher's Day!</h1>
+                        <p class="text-lg text-center opacity-90">To the most amazing teacher</p>
+                        <div class="mt-4 text-4xl">🍎</div>
+                    </div>
+                </div>
+
+                <!-- Back Face -->
+                <div class="card-face card-back theme-classic" id="cardBack">
+                    <div class="h-full flex flex-col items-center justify-center text-white p-6 text-center">
+                        <div class="text-5xl mb-4">📚</div>
+                        <h2 class="text-2xl font-bold dancing-script mb-4">Thank You!</h2>
+                        <p class="text-sm leading-relaxed opacity-90 mb-4">
+                            Hi sir , Happy teacher's day po! 
+                            I wanted to take a moment to express my gratitude for everything you've done for us ,as your students. Thank you po sa mga lessons, sa tiwala, sa mga challenges (I mean sa mga logics & scams sa exam & quizzes), and sa mga advice mo po.
+                            Thank you for all the assurance you've given us for every lesson. You always make sure that we can do it, and it's easy. You've never once made us feel that it's hard (minsan lang,jk) or that we don't have the ability to complete the tasks you gave. Thank you also for giving us chances, understanding, and patience.
+                            I hope it's not too late! Once again, HAPPY TEACHER'S DAY, SIR RANDY!
+                            
+                            
+                        </p>
+                        <p class="text-lg dancing-script">With gratitude & respect</p>
+                        <div class="mt-4 flex space-x-2">
+                            <span class="text-2xl">🌟</span>
+                            <span class="text-2xl">📖</span>
+                            <span class="text-2xl">🎓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="mt-8 flex justify-center space-x-4">
+            <button onclick="openMemories()" class="flip-btn px-6 py-3 rounded-full text-white font-medium">
+                📸 Memories
+            </button>
+            
+            <button onclick="flipCard()" class="flip-btn px-6 py-3 rounded-full text-white font-medium">
+                Open the Message
+            </button>
+            
+            <div class="customize-dropdown">
+                <div class="dropdown-content" id="themeDropdown">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3 text-center">Card Themes</h3>
+                    <div class="flex justify-center space-x-3 mb-4">
+                        <div class="theme-btn theme-classic active" onclick="changeTheme('classic')" title="Classic"></div>
+                        <div class="theme-btn theme-warm" onclick="changeTheme('warm')" title="Warm"></div>
+                        <div class="theme-btn theme-nature" onclick="changeTheme('nature')" title="Nature"></div>
+                        <div class="theme-btn theme-elegant" onclick="changeTheme('elegant')" title="Elegant"></div>
+                        <div class="theme-btn theme-sunset" onclick="changeTheme('sunset')" title="Sunset"></div>
+                    </div>
+                    
+                    <hr class="border-gray-300 mb-4">
+                    
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3 text-center">Background</h3>
+                    <div class="flex justify-center space-x-3">
+                        <div class="bg-option bg-purple active" onclick="changeBackground('purple')" title="Purple"></div>
+                        <div class="bg-option bg-ocean" onclick="changeBackground('ocean')" title="Ocean"></div>
+                        <div class="bg-option bg-sunset" onclick="changeBackground('sunset')" title="Sunset"></div>
+                        <div class="bg-option bg-forest" onclick="changeBackground('forest')" title="Forest"></div>
+                        <div class="bg-option bg-galaxy" onclick="changeBackground('galaxy')" title="Galaxy"></div>
+                    </div>
+                </div>
+                <button onclick="toggleCustomize()" class="customize-btn px-6 py-3 rounded-full text-white font-medium">
+                    🎨 Customize
+                </button>
+            </div>
+        </div>
+
+        
+
+    <!-- Memories Modal -->
+    <div class="memories-modal" id="memoriesModal">
+        <div class="memories-content">
+            <button class="close-btn" onclick="closeMemories()">&times;</button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center dancing-script">📸 Class Memories</h2>
+            
+            <div class="photo-grid" id="photoGrid">
+                <img src="Image/IMG_20251029_034454.jpeg" alt="Class Memory"style="width:100%; height:100%; border-radius:10px; object-fit:cover;">
+                                       
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9817e6c9d2a9bc51',t:'MTc1ODI3MjUxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
