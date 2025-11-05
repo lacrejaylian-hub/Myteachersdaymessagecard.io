@@ -55,4 +55,4 @@ You can easily modify:
 
 Example of a class memory photo:
 
-https://github.com/lacrejaylian-hub/Myteachersdaymessagecard.io/edit/main/README.md
+https://github.com/lacrejaylian-hub/Myteachersdaymessagecard.io
