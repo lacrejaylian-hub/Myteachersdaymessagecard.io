@@ -53,6 +53,5 @@ You can easily modify:
 
 📷 Preview
 
-Example of a class memory photo:
 
  https://lacrejaylian-hub.github.io/Myteachersdaymessagecard.io/
